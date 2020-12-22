@@ -11,7 +11,7 @@ defmodule Membrane.DTLS.IntegrationTest do
         module: Membrane.ICE.Support.TestSender,
         custom_args: [
           handshake_module: Membrane.DTLS.Handshake,
-          handshake_opts: [client_mode: true, dtls_srtp: true, parent: self()]
+          handshake_opts: [client_mode: true, dtls_srtp: true]
         ]
       })
 
@@ -20,7 +20,7 @@ defmodule Membrane.DTLS.IntegrationTest do
         module: Membrane.ICE.Support.TestReceiver,
         custom_args: [
           handshake_module: Membrane.DTLS.Handshake,
-          handshake_opts: [client_mode: false, dtls_srtp: true, parent: self()]
+          handshake_opts: [client_mode: false, dtls_srtp: true]
         ]
       })
 

@@ -26,7 +26,7 @@ source: %Membrane.ICE.Source{
   stun_servers: ["ip:port"],
   controlling_mode: false,
   handshake_module: Membrane.DTLS.Handshake,
-  handshake_opts: [client_mode: true, dtls_srtp: true, parent: self()]
+  handshake_opts: [client_mode: true, dtls_srtp: true]
 }
 ```
 
