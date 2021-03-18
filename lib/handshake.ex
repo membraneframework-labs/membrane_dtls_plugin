@@ -46,6 +46,6 @@ defmodule Membrane.DTLS.Handshake do
 
   @impl Handshake
   def is_hsk_packet(<<head, _rest::binary()>> = packet, _state) do
-    19 < head and head < 64 and byte_size(packet) >= 13
+    head in 20..63 and byte_size(packet) >= 13
   end
 end
