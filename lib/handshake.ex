@@ -16,7 +16,7 @@ defmodule Membrane.DTLS.Handshake do
   require Membrane.Logger
 
   @impl Handshake
-  def init(id, parent, opts) do
+  def init(_id, _parent, opts) do
     {:ok, dtls} =
       ExDTLS.start_link(
         client_mode: opts[:client_mode],
@@ -24,7 +24,7 @@ defmodule Membrane.DTLS.Handshake do
       )
 
     {:ok, fingerprint} = ExDTLS.get_cert_fingerprint(dtls)
-    state = %{:dtls => dtls, :client_mode => opts[:client_mode], :id => id, :parent => parent}
+    state = %{:dtls => dtls, :client_mode => opts[:client_mode]}
     {:ok, fingerprint, state}
   end
 
