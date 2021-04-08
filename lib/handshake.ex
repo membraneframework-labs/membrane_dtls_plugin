@@ -2,12 +2,7 @@ defmodule Membrane.DTLS.Handshake do
   @moduledoc """
   Module responsible for performing DTLS and DTLS-SRTP handshake.
 
-  As `handshake_opts` in Sink/Source there should be passed keyword list containing following
-  fields:
-  * client_mode :: boolean()
-  * dtls_srtp :: boolean()
-
-  For the rest of field meanings please refer to `ExDTLS` library documentation.
+  `handshake_opts` in `membrane_ice_plugin` should be the same as in `t:ExDTLS.opts_t/0`.
   """
   @behaviour Membrane.ICE.Handshake
 
@@ -17,12 +12,7 @@ defmodule Membrane.DTLS.Handshake do
 
   @impl Handshake
   def init(_id, _parent, opts) do
-    {:ok, dtls} =
-      ExDTLS.start_link(
-        client_mode: opts[:client_mode],
-        dtls_srtp: opts[:dtls_srtp]
-      )
-
+    {:ok, dtls} = ExDTLS.start_link(opts)
     {:ok, fingerprint} = ExDTLS.get_cert_fingerprint(dtls)
     state = %{:dtls => dtls, :client_mode => opts[:client_mode]}
     {:ok, fingerprint, state}
