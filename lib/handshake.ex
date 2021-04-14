@@ -38,4 +38,9 @@ defmodule Membrane.DTLS.Handshake do
   def is_hsk_packet(<<head, _rest::binary()>> = packet, _state) do
     head in 20..63 and byte_size(packet) >= 13
   end
+
+  @impl Handshake
+  def stop(%{dtls: dtls}) do
+    ExDTLS.stop(dtls)
+  end
 end
