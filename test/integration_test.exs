@@ -36,6 +36,8 @@ defmodule Membrane.DTLS.IntegrationTest do
     cred_msg = {:set_remote_credentials, tx_credentials}
     Testing.Pipeline.message_child(rx_pid, :ice, cred_msg)
 
+    Testing.Pipeline.message_child(rx_pid, :ice, :gather_candidates)
+    Testing.Pipeline.message_child(tx_pid, :ice, :gather_candidates)
     # start connectivity checks and perform handshake
     {tx_handshake_data, rx_handshake_data} = set_remote_candidates(tx_pid, rx_pid)
     {tx_local_km, tx_remote_km, tx_protection_profile} = tx_handshake_data
@@ -47,6 +49,9 @@ defmodule Membrane.DTLS.IntegrationTest do
     {client_master_key, server_master_key, _crypto_profile} = tx_handshake_data
     assert byte_size(client_master_key) > 0
     assert byte_size(client_master_key) == byte_size(server_master_key)
+
+    Testing.Pipeline.stop_and_terminate(rx_pid, blocking?: true)
+    Testing.Pipeline.stop_and_terminate(tx_pid, blocking?: true)
   end
 
   defp set_remote_candidates(

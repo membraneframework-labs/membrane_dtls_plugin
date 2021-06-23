@@ -1,7 +1,7 @@
 defmodule Membrane.DTLS.Plugin.Mixfile do
   use Mix.Project
 
-  @version "0.3.0"
+  @version "0.4.0"
   @github_url "https://github.com/membraneframework/membrane_dtls_plugin"
 
   def project do
@@ -37,9 +37,9 @@ defmodule Membrane.DTLS.Plugin.Mixfile do
 
   defp deps do
     [
-      {:membrane_core, "~> 0.6.1"},
-      {:membrane_ice_plugin, github: "membraneframework/membrane_ice_plugin"},
-      {:ex_dtls, github: "membraneframework/ex_dtls"},
+      {:membrane_core, "~> 0.7.0"},
+      {:membrane_ice_plugin, "~> 0.5.0"},
+      {:ex_dtls, "~> 0.5.0"},
       {:ex_doc, "~> 0.23", only: :dev, runtime: false},
       {:dialyxir, "~> 1.0.0", only: :dev, runtime: false},
       {:credo, "~> 1.5", only: :dev, runtime: false}
