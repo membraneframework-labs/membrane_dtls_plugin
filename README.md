@@ -13,7 +13,7 @@ The package can be installed by adding `membrane_dtls_plugin` to your list of de
 ```elixir
 def deps do
   [
-    {:membrane_dtls_plugin, "~> 0.3.0"}
+    {:membrane_dtls_plugin, "~> 0.5.0"}
   ]
 end
 ```
@@ -22,7 +22,7 @@ end
 Use this plugin as `handshake_module` in [Membrane ICE Plugin](https://github.com/membraneframework/membrane_ice_plugin.git).
 
 ```elixir
-source: %Membrane.ICE.Source{
+source: %Membrane.ICE.Bin{
   stun_servers: ["ip:port"],
   controlling_mode: false,
   handshake_module: Membrane.DTLS.Handshake,
