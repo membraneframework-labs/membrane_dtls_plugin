@@ -38,8 +38,7 @@ defmodule Membrane.DTLS.Plugin.Mixfile do
   defp deps do
     [
       {:membrane_core, "~> 0.7.0"},
-      {:membrane_ice_plugin,
-       github: "membraneframework/membrane_ice_plugin", branch: "non_concurrent_ice_restart"},
+      {:membrane_ice_plugin, github: "membraneframework/membrane_ice_plugin"},
       {:ex_dtls, github: "membraneframework/ex_dtls"},
       {:ex_doc, "~> 0.23", only: :dev, runtime: false},
       {:dialyxir, "~> 1.0.0", only: :dev, runtime: false},
