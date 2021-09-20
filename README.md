@@ -13,7 +13,7 @@ The package can be installed by adding `membrane_dtls_plugin` to your list of de
 ```elixir
 def deps do
   [
-    {:membrane_dtls_plugin, "~> 0.5.0"}
+    {:membrane_dtls_plugin, "~> 0.6.0"}
   ]
 end
 ```
