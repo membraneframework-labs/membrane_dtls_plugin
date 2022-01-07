@@ -15,7 +15,7 @@ defmodule Membrane.DTLS.Plugin.Mixfile do
 
       # hex
       description:
-        "DTLS (and DTLS-SRTP) implementation of Handshake behaviour for Membrane ICE plugin",
+        "DTLS (and DTLS-SRTP) implementation of Handshake behaviour for Membrane Libnice plugin",
       package: package(),
 
       # docs

@@ -30,11 +30,11 @@ defmodule Membrane.DTLS.IntegrationTest do
     # set credentials
     assert_pipeline_notified(rx_pid, :libnice, {:local_credentials, rx_credentials})
     cred_msg = {:set_remote_credentials, rx_credentials}
-    Testing.Pipeline.message_child(tx_pid, :ice, cred_msg)
+    Testing.Pipeline.message_child(tx_pid, :libnice, cred_msg)
 
     assert_pipeline_notified(tx_pid, :libnice, {:local_credentials, tx_credentials})
     cred_msg = {:set_remote_credentials, tx_credentials}
-    Testing.Pipeline.message_child(rx_pid, :ice, cred_msg)
+    Testing.Pipeline.message_child(rx_pid, :libnice, cred_msg)
 
     Testing.Pipeline.message_child(rx_pid, :libnice, :gather_candidates)
     Testing.Pipeline.message_child(tx_pid, :libnice, :gather_candidates)
