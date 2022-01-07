@@ -38,7 +38,8 @@ defmodule Membrane.DTLS.Plugin.Mixfile do
   defp deps do
     [
       {:membrane_core, "~> 0.8.0"},
-      {:membrane_ice_plugin, "~> 0.8.0"},
+      {:membrane_libnice_plugin,
+       github: "membraneframework/membrane_ice_plugin", branch: "remove-fake-turn-dependency"},
       {:ex_dtls, "~> 0.8.0"},
       {:ex_doc, "~> 0.23", only: :dev, runtime: false},
       {:dialyxir, "~> 1.0.0", only: :dev, runtime: false},

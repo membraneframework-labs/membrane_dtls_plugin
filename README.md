@@ -4,7 +4,7 @@
 [![API Docs](https://img.shields.io/badge/api-docs-yellow.svg?style=flat)](https://hexdocs.pm/membrane_dtls_plugin/)
 [![CircleCI](https://circleci.com/gh/membraneframework/membrane_dtls_plugin.svg?style=svg)](https://circleci.com/gh/membraneframework/membrane_dtls_plugin)
 
-DTLS and DTLS-SRTP Handshake implementation for [Membrane ICE Plugin](https://github.com/membraneframework/membrane_ice_plugin).
+DTLS and DTLS-SRTP Handshake implementation for [Membrane Libnice Plugin](https://github.com/membraneframework/membrane_libnice_plugin).
 
 ## Installation
 
@@ -19,10 +19,10 @@ end
 ```
 
 ## Usage
-Use this plugin as `handshake_module` in [Membrane ICE Plugin](https://github.com/membraneframework/membrane_ice_plugin.git).
+Use this plugin as `handshake_module` in [Membrane Libnice Plugin](https://github.com/membraneframework/membrane_libnice_plugin.git).
 
 ```elixir
-source: %Membrane.ICE.Bin{
+source: %Membrane.Libnice.Bin{
   stun_servers: ["ip:port"],
   controlling_mode: false,
   handshake_module: Membrane.DTLS.Handshake,

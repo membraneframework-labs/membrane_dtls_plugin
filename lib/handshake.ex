@@ -2,11 +2,11 @@ defmodule Membrane.DTLS.Handshake do
   @moduledoc """
   Module responsible for performing DTLS and DTLS-SRTP handshake.
 
-  `handshake_opts` in `membrane_ice_plugin` should be the same as in `t:ExDTLS.opts_t/0`.
+  `handshake_opts` in `membrane_libnice_plugin` should be the same as in `t:ExDTLS.opts_t/0`.
   """
-  @behaviour Membrane.ICE.Handshake
+  @behaviour Membrane.Libnice.Handshake
 
-  alias Membrane.ICE.Handshake
+  alias Membrane.Libnice.Handshake
 
   require Membrane.Logger
 

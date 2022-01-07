@@ -8,7 +8,7 @@ defmodule Membrane.DTLS.IntegrationTest do
   test "ice trickle with DTLS-SRTP handshake" do
     {:ok, tx_pid} =
       Testing.Pipeline.start_link(%Testing.Pipeline.Options{
-        module: Membrane.ICE.Support.TestSender,
+        module: Membrane.Libnice.Support.TestSender,
         custom_args: [
           handshake_module: Membrane.DTLS.Handshake,
           handshake_opts: [client_mode: true, dtls_srtp: true]
@@ -17,7 +17,7 @@ defmodule Membrane.DTLS.IntegrationTest do
 
     {:ok, rx_pid} =
       Testing.Pipeline.start_link(%Testing.Pipeline.Options{
-        module: Membrane.ICE.Support.TestReceiver,
+        module: Membrane.Libnice.Support.TestReceiver,
         custom_args: [
           handshake_module: Membrane.DTLS.Handshake,
           handshake_opts: [client_mode: false, dtls_srtp: true]
@@ -28,16 +28,16 @@ defmodule Membrane.DTLS.IntegrationTest do
     Testing.Pipeline.play(rx_pid)
 
     # set credentials
-    assert_pipeline_notified(rx_pid, :ice, {:local_credentials, rx_credentials})
+    assert_pipeline_notified(rx_pid, :libnice, {:local_credentials, rx_credentials})
     cred_msg = {:set_remote_credentials, rx_credentials}
     Testing.Pipeline.message_child(tx_pid, :ice, cred_msg)
 
-    assert_pipeline_notified(tx_pid, :ice, {:local_credentials, tx_credentials})
+    assert_pipeline_notified(tx_pid, :libnice, {:local_credentials, tx_credentials})
     cred_msg = {:set_remote_credentials, tx_credentials}
     Testing.Pipeline.message_child(rx_pid, :ice, cred_msg)
 
-    Testing.Pipeline.message_child(rx_pid, :ice, :gather_candidates)
-    Testing.Pipeline.message_child(tx_pid, :ice, :gather_candidates)
+    Testing.Pipeline.message_child(rx_pid, :libnice, :gather_candidates)
+    Testing.Pipeline.message_child(tx_pid, :libnice, :gather_candidates)
     # start connectivity checks and perform handshake
     {tx_handshake_data, rx_handshake_data} = set_remote_candidates(tx_pid, rx_pid)
     {tx_local_km, tx_remote_km, tx_protection_profile} = tx_handshake_data
@@ -71,18 +71,18 @@ defmodule Membrane.DTLS.IntegrationTest do
     component_id = 1
 
     receive do
-      {_tx_mod, ^tx_pid, {:handle_notification, {{:new_candidate_full, tx_cand}, :ice}}} ->
+      {_tx_mod, ^tx_pid, {:handle_notification, {{:new_candidate_full, tx_cand}, :libnice}}} ->
         msg = {:set_remote_candidate, tx_cand, component_id}
-        Testing.Pipeline.message_child(rx_pid, :ice, msg)
+        Testing.Pipeline.message_child(rx_pid, :libnice, msg)
         set_remote_candidates(tx_pid, rx_pid, tx_handshake_data, rx_handshake_data)
 
       {_tx_mod, ^tx_pid,
        {:handle_notification, {{:event, %{handshake_data: handshake_data}}, :source}}} ->
         set_remote_candidates(tx_pid, rx_pid, handshake_data, rx_handshake_data)
 
-      {_rx_mod, ^rx_pid, {:handle_notification, {{:new_candidate_full, rx_cand}, :ice}}} ->
+      {_rx_mod, ^rx_pid, {:handle_notification, {{:new_candidate_full, rx_cand}, :libnice}}} ->
         msg = {:set_remote_candidate, rx_cand, component_id}
-        Testing.Pipeline.message_child(tx_pid, :ice, msg)
+        Testing.Pipeline.message_child(tx_pid, :libnice, msg)
         set_remote_candidates(tx_pid, rx_pid, tx_handshake_data, rx_handshake_data)
 
       {_rx_mod, ^rx_pid,
