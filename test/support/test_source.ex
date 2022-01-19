@@ -1,4 +1,4 @@
-defmodule Membrane.ICE.Support.TestSource do
+defmodule Membrane.Libnice.Support.TestSource do
   @moduledoc false
 
   use Membrane.Source
