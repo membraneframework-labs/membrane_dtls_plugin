@@ -39,7 +39,7 @@ defmodule Membrane.DTLS.Plugin.Mixfile do
     [
       {:membrane_core, "~> 0.8.0"},
       {:membrane_libnice_plugin, "~> 0.1.0"},
-      {:ex_dtls, "~> 0.8.0"},
+      {:ex_dtls, "~> 0.10.0"},
       {:ex_doc, "~> 0.23", only: :dev, runtime: false},
       {:dialyxir, "~> 1.0.0", only: :dev, runtime: false},
       {:credo, "~> 1.5", only: :dev, runtime: false}
